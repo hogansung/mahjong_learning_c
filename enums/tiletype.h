@@ -55,4 +55,26 @@ enum class Tiletype {
 typedef std::tuple<Tiletype, Tiletype> TwoSet;
 typedef std::tuple<Tiletype, Tiletype, Tiletype> ThreeSet;
 
+void pushBackTwoSet(std::vector<Tiletype>& requirements, TwoSet two_set) {
+  requirements.emplace_back(std::get<0>(two_set));
+  requirements.emplace_back(std::get<1>(two_set));
+}
+
+void popBackTwoSet(std::vector<Tiletype>& requirements) {
+  requirements.pop_back();
+  requirements.pop_back();
+}
+
+void pushBackThreeSet(std::vector<Tiletype>& requirements, ThreeSet three_set) {
+  requirements.emplace_back(std::get<0>(three_set));
+  requirements.emplace_back(std::get<1>(three_set));
+  requirements.emplace_back(std::get<2>(three_set));
+}
+
+void popBackThreeSet(std::vector<Tiletype>& requirements) {
+  requirements.pop_back();
+  requirements.pop_back();
+  requirements.pop_back();
+}
+
 #endif  // MAHJONG_LEARNING_C_TILETYPE_H

@@ -5,13 +5,15 @@
 #ifndef MAHJONG_LEARNING_C_RULES_RULE_H_
 #define MAHJONG_LEARNING_C_RULES_RULE_H_
 
-#include "rules/condition.h"
 class Rule {
  public:
-  Rule() = default;
-  Rule(std::vector<Condition>) {
-    return;
+  Rule(std::vector<std::vector<unsigned int>> tiletype_counters, unsigned int points) {
+    tiletype_counters_ = tiletype_counters;
+    points_ = points;
   }
+
+  std::vector<std::vector<unsigned int>> tiletype_counters_;
+  unsigned int points_;
 };
 
-#endif //MAHJONG_LEARNING_C_RULES_RULE_H_
+#endif  // MAHJONG_LEARNING_C_RULES_RULE_H_

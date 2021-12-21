@@ -9,65 +9,86 @@
 
 class Tileset {
  public:
-  Tileset(std::vector<Tiletype> bamboo_tiletypes, std::vector<Tiletype> circle_tiletypes,
-          std::vector<Tiletype> character_tiletypes, std::vector<Tiletype> wind_tiletypes,
-          std::vector<Tiletype> dragon_tiletypes, std::vector<Tiletype> season_tiletypes,
-          std::vector<Tiletype> flower_tiletypes)
-      : bamboo_tiletypes_(bamboo_tiletypes),
-        circle_tiletypes_(circle_tiletypes),
-        character_tiletypes_(character_tiletypes),
-        wind_tiletypes_(wind_tiletypes),
-        dragon_tiletypes_(dragon_tiletypes),
-        season_tiletypes_(season_tiletypes),
-        flower_tiletypes_(flower_tiletypes) {
-    assert(bamboo_tiletypes_.size() == 9);
-    assert(circle_tiletypes_.size() == 9);
-    assert(character_tiletypes_.size() == 9);
-    assert(wind_tiletypes_.size() == 4);
-    assert(dragon_tiletypes_.size() == 3);
-    assert(season_tiletypes_.size() == 4);
-    assert(flower_tiletypes_.size() == 4);
+  Tileset(std::vector<std::tuple<Tiletype, unsigned int>> bamboo_tile_metadata,
+          std::vector<std::tuple<Tiletype, unsigned int>> circle_tile_metadata,
+          std::vector<std::tuple<Tiletype, unsigned int>> character_tile_metadata,
+          std::vector<std::tuple<Tiletype, unsigned int>> wind_tile_metadata,
+          std::vector<std::tuple<Tiletype, unsigned int>> dragon_tile_metadata,
+          std::vector<std::tuple<Tiletype, unsigned int>> season_tile_metadata,
+          std::vector<std::tuple<Tiletype, unsigned int>> flower_tile_metadata)
+      : bamboo_tile_metadata_(bamboo_tile_metadata),
+        circle_tile_metadata_(circle_tile_metadata),
+        character_tile_metadata_(character_tile_metadata),
+        wind_tile_metadata_(wind_tile_metadata),
+        dragon_tile_metadata_(dragon_tile_metadata),
+        season_tile_metadata_(season_tile_metadata),
+        flower_tile_metadata_(flower_tile_metadata) {
+    assert(bamboo_tile_metadata_.size() == 9);
+    assert(circle_tile_metadata_.size() == 9);
+    assert(character_tile_metadata_.size() == 9);
+    assert(wind_tile_metadata_.size() == 4);
+    assert(dragon_tile_metadata_.size() == 3);
+    assert(season_tile_metadata_.size() == 4);
+    assert(flower_tile_metadata_.size() == 4);
+
+    tiletype_index = 0;
 
     // Suited Tiles
-    for (auto suited_tiletypes : std::vector<std::vector<Tiletype>>{
-             bamboo_tiletypes_, circle_tiletypes_, character_tiletypes_}) {
-      for (unsigned int idx = 0; idx < suited_tiletypes.size(); idx += 1) {
-        if (idx + 2 < suited_tiletypes.size()) {
-          sequences_.emplace_back(suited_tiletypes[idx], suited_tiletypes[idx + 1],
-                                  suited_tiletypes[idx + 2]);
+    for (auto suited_tile_metadata : std::vector<std::vector<std::tuple<Tiletype, unsigned int>>>{
+             bamboo_tile_metadata_, circle_tile_metadata_, character_tile_metadata_}) {
+      for (unsigned int idx = 0; idx < suited_tile_metadata.size(); idx += 1) {
+        if (idx + 2 < suited_tile_metadata.size()) {
+          sequences_.emplace_back(std::get<0>(suited_tile_metadata[idx]),
+                                  std::get<0>(suited_tile_metadata[idx + 1]),
+                                  std::get<0>(suited_tile_metadata[idx + 2]));
         }
-        tiletypes_.emplace_back(suited_tiletypes[idx]);
-        pairs_.emplace_back(suited_tiletypes[idx], suited_tiletypes[idx]);
-        triplets_.emplace_back(suited_tiletypes[idx], suited_tiletypes[idx], suited_tiletypes[idx]);
+        tiletype_to_index[std::get<0>(suited_tile_metadata[idx])] = tiletype_index++;
+        tiletype_limit.emplace_back(std::get<1>(suited_tile_metadata[idx]));
+        tiletypes_.emplace_back(std::get<0>(suited_tile_metadata[idx]));
+        pairs_.emplace_back(std::get<0>(suited_tile_metadata[idx]),
+                            std::get<0>(suited_tile_metadata[idx]));
+        triplets_.emplace_back(std::get<0>(suited_tile_metadata[idx]),
+                               std::get<0>(suited_tile_metadata[idx]),
+                               std::get<0>(suited_tile_metadata[idx]));
       }
     }
 
     // Honor Tiles
-    for (auto suited_tiletypes :
-         std::vector<std::vector<Tiletype>>{wind_tiletypes_, dragon_tiletypes_}) {
-      for (unsigned int idx = 0; idx < suited_tiletypes.size(); idx += 1) {
-        tiletypes_.emplace_back(suited_tiletypes[idx]);
-        pairs_.emplace_back(suited_tiletypes[idx], suited_tiletypes[idx]);
-        triplets_.emplace_back(suited_tiletypes[idx], suited_tiletypes[idx], suited_tiletypes[idx]);
+    for (auto suited_tile_metadata : std::vector<std::vector<std::tuple<Tiletype, unsigned int>>>{
+             wind_tile_metadata_, dragon_tile_metadata_}) {
+      for (unsigned int idx = 0; idx < suited_tile_metadata.size(); idx += 1) {
+        tiletype_to_index[std::get<0>(suited_tile_metadata[idx])] = tiletype_index++;
+        tiletype_limit.emplace_back(std::get<1>(suited_tile_metadata[idx]));
+        tiletypes_.emplace_back(std::get<0>(suited_tile_metadata[idx]));
+        pairs_.emplace_back(std::get<0>(suited_tile_metadata[idx]),
+                            std::get<0>(suited_tile_metadata[idx]));
+        triplets_.emplace_back(std::get<0>(suited_tile_metadata[idx]),
+                               std::get<0>(suited_tile_metadata[idx]),
+                               std::get<0>(suited_tile_metadata[idx]));
       }
     }
 
     // Bonus Tiles
-    for (auto suited_tiletypes :
-         std::vector<std::vector<Tiletype>>{season_tiletypes_, flower_tiletypes_}) {
-      for (unsigned int idx = 0; idx < suited_tiletypes.size(); idx += 1) {
-        tiletypes_.emplace_back(suited_tiletypes[idx]);
+    for (auto suited_tile_metadata : std::vector<std::vector<std::tuple<Tiletype, unsigned int>>>{
+             season_tile_metadata_, flower_tile_metadata_}) {
+      for (unsigned int idx = 0; idx < suited_tile_metadata.size(); idx += 1) {
+        tiletype_to_index[std::get<0>(suited_tile_metadata[idx])] = tiletype_index++;
+        tiletype_limit.emplace_back(std::get<1>(suited_tile_metadata[idx]));
+        tiletypes_.emplace_back(std::get<0>(suited_tile_metadata[idx]));
       }
     }
   }
 
-  const std::vector<Tiletype> bamboo_tiletypes_;
-  const std::vector<Tiletype> circle_tiletypes_;
-  const std::vector<Tiletype> character_tiletypes_;
-  const std::vector<Tiletype> wind_tiletypes_;
-  const std::vector<Tiletype> dragon_tiletypes_;
-  const std::vector<Tiletype> season_tiletypes_;
-  const std::vector<Tiletype> flower_tiletypes_;
+  const std::vector<std::tuple<Tiletype, unsigned int>> bamboo_tile_metadata_;
+  const std::vector<std::tuple<Tiletype, unsigned int>> circle_tile_metadata_;
+  const std::vector<std::tuple<Tiletype, unsigned int>> character_tile_metadata_;
+  const std::vector<std::tuple<Tiletype, unsigned int>> wind_tile_metadata_;
+  const std::vector<std::tuple<Tiletype, unsigned int>> dragon_tile_metadata_;
+  const std::vector<std::tuple<Tiletype, unsigned int>> season_tile_metadata_;
+  const std::vector<std::tuple<Tiletype, unsigned int>> flower_tile_metadata_;
+  unsigned int tiletype_index;
+  std::unordered_map<Tiletype, unsigned int> tiletype_to_index;
+  std::vector<unsigned int> tiletype_limit;
   std::vector<Tiletype> tiletypes_;
   std::vector<TwoSet> pairs_;
   std::vector<ThreeSet> sequences_;
