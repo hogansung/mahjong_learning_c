@@ -1,9 +1,16 @@
+#include <tilesets/guangdong_tileset.h>
+
 #include <iostream>
-#include "rulesets/guangdong_ruleset.h"
+
 #include "enums/tiletype.h"
+#include "rulesets/guangdong_ruleset.h"
 
 int main() {
   GuangdongRuleset ruleset = GuangdongRuleset();
-//  std::cout << "Hello, World!" << ruleset.ruleset << std::endl;
+  GuangdongTileset tileset = GuangdongTileset();
+  std::cout << tileset.tiletypes_.size() << std::endl;
+  std::cout << tileset.pairs_.size() << std::endl;
+  std::cout << tileset.sequences_.size() << std::endl;
+  std::cout << tileset.triplets_.size() << std::endl;
   return 0;
 }

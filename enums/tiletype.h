@@ -7,7 +7,7 @@
 
 #include <vector>
 
-enum class TileType {
+enum class Tiletype {
   bambooOne = 0,             // 一條
   bambooTwo = 1,             // 二條
   bambooThree = 2,           // 三條
@@ -52,70 +52,7 @@ enum class TileType {
   flowerBamboo = 41,         // 竹
 };
 
-std::vector<TileType> allBambooTileTypes{
-    TileType::bambooOne,   TileType::bambooTwo,   TileType::bambooThree,
-    TileType::bambooFour,  TileType::bambooFive,  TileType::bambooSix,
-    TileType::bambooSeven, TileType::bambooEight, TileType::bambooNine,
-};
-
-std::vector<TileType> allCircleTileTypes{
-    TileType::circleOne,   TileType::circleTwo,   TileType::circleThree,
-    TileType::circleFour,  TileType::circleFive,  TileType::circleSix,
-    TileType::circleSeven, TileType::circleEight, TileType::circleNine,
-};
-
-std::vector<TileType> allCharacterTileTypes{
-    TileType::characterOne,   TileType::characterTwo,
-    TileType::characterThree, TileType::characterFour,
-    TileType::characterFive,  TileType::characterSix,
-    TileType::characterSeven, TileType::characterEight,
-    TileType::characterNine,
-};
-
-std::vector<TileType> allSuitedTileTypes{
-    TileType::bambooOne,      TileType::bambooTwo,
-    TileType::bambooThree,    TileType::bambooFour,
-    TileType::bambooFive,     TileType::bambooSix,
-    TileType::bambooSeven,    TileType::bambooEight,
-    TileType::bambooNine,     TileType::circleOne,
-    TileType::circleTwo,      TileType::circleThree,
-    TileType::circleFour,     TileType::circleFive,
-    TileType::circleSix,      TileType::circleSeven,
-    TileType::circleEight,    TileType::circleNine,
-    TileType::characterOne,   TileType::characterTwo,
-    TileType::characterThree, TileType::characterFour,
-    TileType::characterFive,  TileType::characterSix,
-    TileType::characterSeven, TileType::characterEight,
-    TileType::characterNine,
-};
-
-std::vector<TileType> allWindTileTypes{
-    TileType::windEast,
-    TileType::windSouth,
-    TileType::windWest,
-    TileType::windNorth,
-};
-
-std::vector<TileType> allDragonTileTypes{
-    TileType::dragonRed,
-    TileType::dragonGreen,
-    TileType::dragonWhite,
-};
-
-std::vector<TileType> allHonorTileTypes{
-    TileType::windEast,    TileType::windSouth, TileType::windWest,
-    TileType::windNorth,   TileType::dragonRed, TileType::dragonGreen,
-    TileType::dragonWhite,
-};
-
-std::vector<TileType> allBonusTileTypes{
-    TileType::seasonSpring,        TileType::seasonSummer,
-    TileType::seasonAutumn,        TileType::seasonWinter,
-    TileType::flowerPlum,          TileType::flowerOrchid,
-    TileType::flowerChrysanthemum, TileType::flowerBamboo,
-};
-
-typedef std::tuple<TileType, TileType, TileType> ThreeSet;
-typedef std::tuple<TileType, TileType, TileType> TwoSet;
+typedef std::tuple<Tiletype, Tiletype> TwoSet;
+typedef std::tuple<Tiletype, Tiletype, Tiletype> ThreeSet;
 
 #endif  // MAHJONG_LEARNING_C_TILETYPE_H

@@ -8,30 +8,37 @@
 #include "enums/tiletype.h"
 
 class Ruleset {
-  std::vector<ThreeSet> triplets{ThreeSet(TileType::)};
-  std::vector<ThreeSet> sequences{
-      ThreeSet(TileType::bambooOne, TileType::bambooTwo, TileType::bambooThree),
-      ThreeSet(TileType::bambooTwo, TileType::bambooThree, TileType::bambooFour),
-      ThreeSet(TileType::bambooThree, TileType::bambooFour, TileType::bambooFive),
-      ThreeSet(TileType::bambooFour, TileType::bambooFive, TileType::bambooSix),
-      ThreeSet(TileType::bambooFive, TileType::bambooSix, TileType::bambooSeven),
-      ThreeSet(TileType::bambooSix, TileType::bambooSeven, TileType::bambooEight),
-      ThreeSet(TileType::bambooSeven, TileType::bambooEight, TileType::bambooNine),
-      ThreeSet(TileType::circleOne, TileType::circleTwo, TileType::circleThree),
-      ThreeSet(TileType::circleTwo, TileType::circleThree, TileType::circleFour),
-      ThreeSet(TileType::circleThree, TileType::circleFour, TileType::circleFive),
-      ThreeSet(TileType::circleFour, TileType::circleFive, TileType::circleSix),
-      ThreeSet(TileType::circleFive, TileType::circleSix, TileType::circleSeven),
-      ThreeSet(TileType::circleSix, TileType::circleSeven, TileType::circleEight),
-      ThreeSet(TileType::circleSeven, TileType::circleEight, TileType::circleNine),
-      ThreeSet(TileType::characterOne, TileType::characterTwo, TileType::characterThree),
-      ThreeSet(TileType::characterTwo, TileType::characterThree, TileType::characterFour),
-      ThreeSet(TileType::characterThree, TileType::characterFour, TileType::characterFive),
-      ThreeSet(TileType::characterFour, TileType::characterFive, TileType::characterSix),
-      ThreeSet(TileType::characterFive, TileType::characterSix, TileType::characterSeven),
-      ThreeSet(TileType::characterSix, TileType::characterSeven, TileType::characterEight),
-      ThreeSet(TileType::characterSeven, TileType::characterEight, TileType::characterNine),
-  };
+ public:
+  static void generateConditions(std::vector<Tiletype> existing_requirements,
+                                 unsigned int max_n_pairs, unsigned int max_n_sequences,
+                                 unsigned int max_n_triplets, unsigned int max_n_all);
+
+  //  std::vector<ThreeSet> triplets{ThreeSet(Tiletype::)};
+  //  std::vector<ThreeSet> sequences{
+  //      ThreeSet(Tiletype::bambooOne, Tiletype::bambooTwo, Tiletype::bambooThree),
+  //      ThreeSet(Tiletype::bambooTwo, Tiletype::bambooThree, Tiletype::bambooFour),
+  //      ThreeSet(Tiletype::bambooThree, Tiletype::bambooFour, Tiletype::bambooFive),
+  //      ThreeSet(Tiletype::bambooFour, Tiletype::bambooFive, Tiletype::bambooSix),
+  //      ThreeSet(Tiletype::bambooFive, Tiletype::bambooSix, Tiletype::bambooSeven),
+  //      ThreeSet(Tiletype::bambooSix, Tiletype::bambooSeven, Tiletype::bambooEight),
+  //      ThreeSet(Tiletype::bambooSeven, Tiletype::bambooEight, Tiletype::bambooNine),
+  //      ThreeSet(Tiletype::circleOne, Tiletype::circleTwo, Tiletype::circleThree),
+  //      ThreeSet(Tiletype::circleTwo, Tiletype::circleThree, Tiletype::circleFour),
+  //      ThreeSet(Tiletype::circleThree, Tiletype::circleFour, Tiletype::circleFive),
+  //      ThreeSet(Tiletype::circleFour, Tiletype::circleFive, Tiletype::circleSix),
+  //      ThreeSet(Tiletype::circleFive, Tiletype::circleSix, Tiletype::circleSeven),
+  //      ThreeSet(Tiletype::circleSix, Tiletype::circleSeven, Tiletype::circleEight),
+  //      ThreeSet(Tiletype::circleSeven, Tiletype::circleEight, Tiletype::circleNine),
+  //      ThreeSet(Tiletype::characterOne, Tiletype::characterTwo, Tiletype::characterThree),
+  //      ThreeSet(Tiletype::characterTwo, Tiletype::characterThree, Tiletype::characterFour),
+  //      ThreeSet(Tiletype::characterThree, Tiletype::characterFour, Tiletype::characterFive),
+  //      ThreeSet(Tiletype::characterFour, Tiletype::characterFive, Tiletype::characterSix),
+  //      ThreeSet(Tiletype::characterFive, Tiletype::characterSix, Tiletype::characterSeven),
+  //      ThreeSet(Tiletype::characterSix, Tiletype::characterSeven, Tiletype::characterEight),
+  //      ThreeSet(Tiletype::characterSeven, Tiletype::characterEight, Tiletype::characterNine),
+  //  };
+
+  //  static generateConditions()
 };
 
 #endif  // MAHJONG_LEARNING_C_RULESETS_RULESET_H_
