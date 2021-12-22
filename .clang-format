@@ -1,4 +1,7 @@
 # Generated from CLion C/C++ Code Style settings
 BasedOnStyle: Google
 SortIncludes: CaseSensitive
-ColumnLimit: 100
+ColumnLimit: 120
+#AlignAfterOpenBracket: AlwaysBreak
+#BinPackArguments: false
+#BinPackParameters: false

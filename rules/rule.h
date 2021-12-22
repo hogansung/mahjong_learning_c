@@ -7,13 +7,15 @@
 
 class Rule {
  public:
-  Rule(std::vector<std::vector<unsigned int>> tiletype_counters, unsigned int points) {
+  Rule(std::string rule_name, std::vector<std::vector<uint>> tiletype_counters, uint points) {
+    rule_name_ = rule_name;
     tiletype_counters_ = tiletype_counters;
     points_ = points;
   }
 
-  std::vector<std::vector<unsigned int>> tiletype_counters_;
-  unsigned int points_;
+  std::string rule_name_;
+  std::vector<std::vector<uint>> tiletype_counters_;
+  uint points_;
 };
 
 #endif  // MAHJONG_LEARNING_C_RULES_RULE_H_

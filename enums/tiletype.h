@@ -8,33 +8,33 @@
 #include <vector>
 
 enum class Tiletype {
-  bambooOne = 0,             // 一條
-  bambooTwo = 1,             // 二條
-  bambooThree = 2,           // 三條
-  bambooFour = 3,            // 四條
-  bambooFive = 4,            // 五條
-  bambooSix = 5,             // 六條
-  bambooSeven = 6,           // 七條
-  bambooEight = 7,           // 八條
-  bambooNine = 8,            // 九條
-  circleOne = 9,             // 一條
-  circleTwo = 10,            // 二條
-  circleThree = 11,          // 三條
-  circleFour = 12,           // 四條
-  circleFive = 13,           // 五條
-  circleSix = 14,            // 六條
-  circleSeven = 15,          // 七條
-  circleEight = 16,          // 八條
-  circleNine = 17,           // 九條
-  characterOne = 18,         // 一條
-  characterTwo = 19,         // 二條
-  characterThree = 20,       // 三條
-  characterFour = 21,        // 四條
-  characterFive = 22,        // 五條
-  characterSix = 23,         // 六條
-  characterSeven = 24,       // 七條
-  characterEight = 25,       // 八條
-  characterNine = 26,        // 九條
+  soOne = 0,                 // 一條
+  soTwo = 1,                 // 二條
+  soThree = 2,               // 三條
+  soFour = 3,                // 四條
+  soFive = 4,                // 五條
+  soSix = 5,                 // 六條
+  soSeven = 6,               // 七條
+  soEight = 7,               // 八條
+  soNine = 8,                // 九條
+  pinOne = 9,                // 一條
+  pinTwo = 10,               // 二條
+  pinThree = 11,             // 三條
+  pinFour = 12,              // 四條
+  pinFive = 13,              // 五條
+  pinSix = 14,               // 六條
+  pinSeven = 15,             // 七條
+  pinEight = 16,             // 八條
+  pinNine = 17,              // 九條
+  manOne = 18,               // 一條
+  manTwo = 19,               // 二條
+  manThree = 20,             // 三條
+  manFour = 21,              // 四條
+  manFive = 22,              // 五條
+  manSix = 23,               // 六條
+  manSeven = 24,             // 七條
+  manEight = 25,             // 八條
+  manNine = 26,              // 九條
   windEast = 27,             // 東
   windSouth = 28,            // 南
   windWest = 29,             // 西
@@ -54,27 +54,5 @@ enum class Tiletype {
 
 typedef std::tuple<Tiletype, Tiletype> TwoSet;
 typedef std::tuple<Tiletype, Tiletype, Tiletype> ThreeSet;
-
-void pushBackTwoSet(std::vector<Tiletype>& requirements, TwoSet two_set) {
-  requirements.emplace_back(std::get<0>(two_set));
-  requirements.emplace_back(std::get<1>(two_set));
-}
-
-void popBackTwoSet(std::vector<Tiletype>& requirements) {
-  requirements.pop_back();
-  requirements.pop_back();
-}
-
-void pushBackThreeSet(std::vector<Tiletype>& requirements, ThreeSet three_set) {
-  requirements.emplace_back(std::get<0>(three_set));
-  requirements.emplace_back(std::get<1>(three_set));
-  requirements.emplace_back(std::get<2>(three_set));
-}
-
-void popBackThreeSet(std::vector<Tiletype>& requirements) {
-  requirements.pop_back();
-  requirements.pop_back();
-  requirements.pop_back();
-}
 
 #endif  // MAHJONG_LEARNING_C_TILETYPE_H
