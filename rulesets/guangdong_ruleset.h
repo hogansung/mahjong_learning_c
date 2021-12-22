@@ -13,14 +13,20 @@
 
 class GuangdongRuleset : public Ruleset {
  public:
-  GuangdongRuleset() : Ruleset(GuangdongTileset()) {
+  GuangdongRuleset() : Ruleset(GuangdongTileset(), 14) {
     // Preprocess all common valid combinations
     tiletype_counters_for_four_sets_one_pair_ = generateTiletypeCountersIncrementally(
-        std::vector<std::vector<Tiletype>>{std::vector<Tiletype>()}, std::tuple<uint, uint>(1, 1),
-        std::tuple<uint, uint>(0, 4), std::tuple<uint, uint>(0, 4), 14);
+        std::vector<std::vector<Tiletype>>{std::vector<Tiletype>()}, std::vector<std::tuple<uint, uint, uint>>{
+                                                                         std::make_tuple(1, 0, 4),
+                                                                         std::make_tuple(1, 1, 3),
+                                                                         std::make_tuple(1, 2, 2),
+                                                                         std::make_tuple(1, 3, 1),
+                                                                         std::make_tuple(1, 4, 0),
+                                                                     });
     tiletype_counters_for_seven_pairs_ = generateTiletypeCountersIncrementally(
-        std::vector<std::vector<Tiletype>>{std::vector<Tiletype>()}, std::tuple<uint, uint>(7, 7),
-        std::tuple<uint, uint>(0, 0), std::tuple<uint, uint>(0, 0), 14);
+        std::vector<std::vector<Tiletype>>{std::vector<Tiletype>()}, std::vector<std::tuple<uint, uint, uint>>{
+                                                                         std::make_tuple(7, 0, 0),
+                                                                     });
 
     // Prepare all rules
     rules_ = std::vector<Rule>{
@@ -33,17 +39,15 @@ class GuangdongRuleset : public Ruleset {
                      std::vector<Tiletype>{Tiletype::dragonGreen, Tiletype::dragonGreen, Tiletype::dragonGreen},
                      std::vector<Tiletype>{Tiletype::dragonRed, Tiletype::dragonRed, Tiletype::dragonRed},
                  },
-                 std::tuple<uint, uint>(1, 1), std::tuple<uint, uint>(0, 3), std::tuple<uint, uint>(0, 3), 14),
+                 std::vector<std::tuple<uint, uint, uint>>{
+                     std::make_tuple(1, 0, 3),
+                     std::make_tuple(1, 1, 2),
+                     std::make_tuple(1, 2, 1),
+                     std::make_tuple(1, 3, 0),
+                 }),
              1),
         // TODO: 明杠
-        Rule("無花",
-             generateTiletypeCountersDecrementally(
-                 std::vector<std::vector<Tiletype>>{
-                     std::vector<Tiletype>{Tiletype::flowerPlum, Tiletype::flowerOrchid, Tiletype::flowerChrysanthemum,
-                                           Tiletype::flowerBamboo},
-                 },
-                 tiletype_counters_for_four_sets_one_pair_),
-             1),
+        // TODO: 無花
         // TODO: 正花
         // TODO: 門清
         // TODO: 海底撈月
@@ -64,7 +68,13 @@ class GuangdongRuleset : public Ruleset {
                      std::vector<Tiletype>{Tiletype::manFive, Tiletype::manFive},
                      std::vector<Tiletype>{Tiletype::manEight, Tiletype::manEight},
                  },
-                 std::tuple<uint, uint>(0, 0), std::tuple<uint, uint>(0, 4), std::tuple<uint, uint>(0, 4), 14),
+                 std::vector<std::tuple<uint, uint, uint>>{
+                     std::make_tuple(0, 0, 4),
+                     std::make_tuple(0, 1, 3),
+                     std::make_tuple(0, 2, 2),
+                     std::make_tuple(0, 3, 1),
+                     std::make_tuple(0, 4, 0),
+                 }),
              1),
         Rule("缺五",
              generateTiletypeCountersDecrementally(
@@ -83,8 +93,12 @@ class GuangdongRuleset : public Ruleset {
                      std::vector<Tiletype>{Tiletype::manOne, Tiletype::manOne, Tiletype::manOne},
                      std::vector<Tiletype>{Tiletype::manNine, Tiletype::manNine, Tiletype::manNine},
                  },
-                 std::tuple<uint, uint>(1, 1), std::tuple<uint, uint>(0, 3), std::tuple<uint, uint>(0, 3), 14),
-
+                 std::vector<std::tuple<uint, uint, uint>>{
+                     std::make_tuple(1, 0, 3),
+                     std::make_tuple(1, 1, 2),
+                     std::make_tuple(1, 2, 1),
+                     std::make_tuple(1, 3, 0),
+                 }),
              1),
         Rule("無字",
              generateTiletypeCountersDecrementally(
@@ -142,7 +156,11 @@ class GuangdongRuleset : public Ruleset {
                      std::vector<Tiletype>{Tiletype::manSeven, Tiletype::manEight, Tiletype::manNine,
                                            Tiletype::manSeven, Tiletype::manEight, Tiletype::manNine},
                  },
-                 std::tuple<uint, uint>(1, 1), std::tuple<uint, uint>(0, 2), std::tuple<uint, uint>(0, 2), 14),
+                 std::vector<std::tuple<uint, uint, uint>>{
+                     std::make_tuple(1, 0, 2),
+                     std::make_tuple(1, 1, 1),
+                     std::make_tuple(1, 2, 0),
+                 }),
              1),
         // TODO: 卡五
         // TODO: 單吊
@@ -163,7 +181,11 @@ class GuangdongRuleset : public Ruleset {
                      std::vector<Tiletype>{Tiletype::manOne, Tiletype::manOne, Tiletype::manOne, Tiletype::manNine,
                                            Tiletype::manNine, Tiletype::manNine},
                  },
-                 std::tuple<uint, uint>(1, 1), std::tuple<uint, uint>(0, 2), std::tuple<uint, uint>(0, 2), 14),
+                 std::vector<std::tuple<uint, uint, uint>>{
+                     std::make_tuple(1, 0, 2),
+                     std::make_tuple(1, 1, 1),
+                     std::make_tuple(1, 2, 0),
+                 }),
              1),
         Rule("缺門",
              generateTiletypeCountersDecrementally(
@@ -208,7 +230,10 @@ class GuangdongRuleset : public Ruleset {
                                            Tiletype::pinFive, Tiletype::pinSix, Tiletype::soSeven, Tiletype::soEight,
                                            Tiletype::soNine},
                  },
-                 std::tuple<uint, uint>(1, 1), std::tuple<uint, uint>(0, 1), std::tuple<uint, uint>(0, 1), 14),
+                 std::vector<std::tuple<uint, uint, uint>>{
+                     std::make_tuple(1, 0, 1),
+                     std::make_tuple(1, 1, 0),
+                 }),
              1),
         // TODO: 搶杠
         // TODO: 兩杠
@@ -261,7 +286,11 @@ class GuangdongRuleset : public Ruleset {
                      std::vector<Tiletype>{Tiletype::pinSeven, Tiletype::pinEight, Tiletype::pinNine,
                                            Tiletype::manSeven, Tiletype::manEight, Tiletype::manNine},
                  },
-                 std::tuple<uint, uint>(1, 1), std::tuple<uint, uint>(0, 2), std::tuple<uint, uint>(0, 2), 14),
+                 std::vector<std::tuple<uint, uint, uint>>{
+                     std::make_tuple(1, 0, 2),
+                     std::make_tuple(1, 1, 1),
+                     std::make_tuple(1, 2, 0),
+                 }),
              1),
         Rule("連六",
              generateTiletypeCountersIncrementally(
@@ -291,7 +320,11 @@ class GuangdongRuleset : public Ruleset {
                      std::vector<Tiletype>{Tiletype::manFour, Tiletype::manFive, Tiletype::manSix, Tiletype::manSeven,
                                            Tiletype::manEight, Tiletype::manNine},
                  },
-                 std::tuple<uint, uint>(1, 1), std::tuple<uint, uint>(0, 2), std::tuple<uint, uint>(0, 2), 14),
+                 std::vector<std::tuple<uint, uint, uint>>{
+                     std::make_tuple(1, 0, 2),
+                     std::make_tuple(1, 1, 1),
+                     std::make_tuple(1, 2, 0),
+                 }),
              1),
         /* 三番 */
         // TODO: 門風, 圈風, 花槓, 暗槓, 全求人, 門清自摸, 槓上開花, 雙暗刻, 斷幺九, 一條龍, 三色同順, 五門齊,
@@ -307,7 +340,9 @@ class GuangdongRuleset : public Ruleset {
                      std::vector<Tiletype>{Tiletype::dragonGreen, Tiletype::dragonGreen},
                      std::vector<Tiletype>{Tiletype::dragonRed, Tiletype::dragonRed},
                  },
-                 std::tuple<uint, uint>(0, 0), std::tuple<uint, uint>(4, 4), std::tuple<uint, uint>(0, 0), 14),
+                 std::vector<std::tuple<uint, uint, uint>>{
+                     std::make_tuple(0, 4, 0),
+                 }),
              0),
         /* 五番 */
         // TODO:

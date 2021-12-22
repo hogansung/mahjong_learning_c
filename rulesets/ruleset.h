@@ -10,7 +10,7 @@
 
 class Ruleset {
  public:
-  Ruleset(Tileset tileset) : tileset_(tileset) {}
+  Ruleset(Tileset tileset, uint tile_num) : tileset_(tileset), tile_num_(tile_num) {}
 
   void pushBackTwoSet(std::vector<uint>& tiletype_counter, TwoSet two_set) {
     tiletype_counter[tileset_.tiletype_to_index.at(std::get<0>(two_set))] += 1;
@@ -85,31 +85,18 @@ class Ruleset {
   }
 
   std::vector<std::vector<uint>> generateTiletypeCountersIncrementally(
-      const std::vector<std::vector<Tiletype>> included_tiles_vct, const std::tuple<uint, uint> pair_constraints,
-      const std::tuple<uint, uint> sequence_constraints, const std::tuple<uint, uint> triplet_constraints,
-      uint max_tile_num) {
+      const std::vector<std::vector<Tiletype>> included_tiles_vct, std::vector<std::tuple<uint, uint, uint>> nums_vct) {
     std::vector<std::vector<uint>> tiletype_counters;
     for (auto included_tiles : included_tiles_vct) {
-      assert(included_tiles.size() + get<1>(pair_constraints) * 2 <= max_tile_num);
-      assert(included_tiles.size() + get<1>(sequence_constraints) * 3 <= max_tile_num);
-      assert(included_tiles.size() + get<1>(triplet_constraints) * 3 <= max_tile_num);
-
       std::vector<uint> tiletype_counter = _createTiletypeCounterFromTiles(included_tiles);
-      for (uint pair_num = get<0>(pair_constraints); pair_num <= get<1>(pair_constraints); pair_num += 1) {
-        for (uint sequence_num = get<0>(sequence_constraints); sequence_num <= get<1>(sequence_constraints);
-             sequence_num += 1) {
-          if (included_tiles.size() + pair_num * 2 + sequence_num * 3 > max_tile_num) {
-            break;
-          }
-          for (uint triplet_num = get<0>(triplet_constraints); triplet_num <= get<1>(triplet_constraints);
-               triplet_num += 1) {
-            if (included_tiles.size() + pair_num * 2 + sequence_num * 3 + triplet_num * 3 != max_tile_num) {
-              continue;
-            }
-            _generateTiletypeCountersIncrementally(tiletype_counter, 0, pair_num, 0, sequence_num, 0, triplet_num,
-                                                   tiletype_counters);
-          }
-        }
+      for (auto nums : nums_vct) {
+        uint pair_num = std::get<0>(nums);
+        uint sequence_num = std::get<1>(nums);
+        uint triplet_num = std::get<2>(nums);
+        //        std::cout << included_tiles.size() + pair_num * 2 + sequence_num * 3 + triplet_num * 3 << std::endl;
+        assert(included_tiles.size() + pair_num * 2 + sequence_num * 3 + triplet_num * 3 == tile_num_);
+        _generateTiletypeCountersIncrementally(tiletype_counter, 0, pair_num, 0, sequence_num, 0, triplet_num,
+                                               tiletype_counters);
       }
     }
     return tiletype_counters;
@@ -145,6 +132,7 @@ class Ruleset {
   }
 
   Tileset tileset_;
+  uint tile_num_ = 14;
   std::vector<std::vector<uint>> tiletype_counters_for_four_sets_one_pair_;
   std::vector<std::vector<uint>> tiletype_counters_for_seven_pairs_;
   std::vector<Rule> rules_;

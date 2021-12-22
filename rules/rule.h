@@ -14,8 +14,11 @@ class Rule {
   }
 
   std::string rule_name_;
+  std::string rule_idx;
   std::vector<std::vector<uint>> tiletype_counters_;
   uint points_;
+
+  inline static int rule_size = 0;
 };
 
 #endif  // MAHJONG_LEARNING_C_RULES_RULE_H_
