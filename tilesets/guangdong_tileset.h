@@ -71,7 +71,15 @@ class GuangdongTileset : public Tileset {
                 std::make_tuple(Tiletype::flowerOrchid, 1),
                 std::make_tuple(Tiletype::flowerChrysanthemum, 1),
                 std::make_tuple(Tiletype::flowerBamboo, 1),
-            }){};
+            }) {
+    assert(so_tile_metadata_.size() == 9);
+    assert(pin_tile_metadata_.size() == 9);
+    assert(man_tile_metadata_.size() == 9);
+    assert(wind_tile_metadata_.size() == 4);
+    assert(dragon_tile_metadata_.size() == 3);
+    assert(season_tile_metadata_.size() == 4);
+    assert(flower_tile_metadata_.size() == 4);
+  };
 };
 
 #endif  // MAHJONG_LEARNING_C_TILESETS_GUANGDONG_TILESET_H_
