@@ -6,6 +6,7 @@
 #define MAHJONG_LEARNING_C_TILESETS_TILESET_H_
 
 #include <iostream>
+#include <unordered_map>
 
 #include "enums/tiletype.h"
 

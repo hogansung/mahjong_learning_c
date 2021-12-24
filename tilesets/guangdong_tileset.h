@@ -79,6 +79,9 @@ class GuangdongTileset : public Tileset {
     assert(dragon_tile_metadata_.size() == 3);
     assert(season_tile_metadata_.size() == 4);
     assert(flower_tile_metadata_.size() == 4);
+    // Check the tiletype sizes
+    assert(common_tiletype_size == 34);
+    assert(bonus_tiletype_size == 8);
   };
 };
 

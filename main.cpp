@@ -6,6 +6,7 @@
 #include <fstream>
 #include <iostream>
 
+#include "guangdong_common_tiletype_counter.h"
 #include "rulesets/guangdong_ruleset.h"
 #include "tiletype_counter.h"
 
@@ -24,6 +25,9 @@ int main() {
   //
   //  std::cout << ruleset.tiletype_counters_for_four_sets_one_pair_.size() << std::endl;
   //  std::cout << ruleset.tiletype_counters_for_seven_pairs_.size() << std::endl;
+
+  //  GuangdongCommonTiletypeCounter tiletype_counter;
+  //  std::cout << tiletype_counter.counter_.size() << std::endl;
 
   return 0;
 }
